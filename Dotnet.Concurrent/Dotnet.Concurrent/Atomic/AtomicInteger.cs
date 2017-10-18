@@ -68,7 +68,7 @@ namespace Dotnet.Concurrent.Atomic
         /// 自减一，返回旧值
         /// </summary>
         /// <returns></returns>
-        public int DecrementAndGet()
+        public int GetAndDecrement()
         {
             return Interlocked.Decrement(ref value)+1;
         }
