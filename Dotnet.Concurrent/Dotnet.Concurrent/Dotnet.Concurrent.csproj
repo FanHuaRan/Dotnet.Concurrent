@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Atomic\AtomicIneger.cs" />
+    <Compile Include="Atomic\AtomicBoolean.cs" />
+    <Compile Include="Atomic\AtomicInteger.cs" />
+    <Compile Include="Atomic\AtomicLong.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
