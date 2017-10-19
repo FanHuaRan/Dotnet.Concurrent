@@ -11,6 +11,7 @@ namespace Dotnet.Concurrent.Atomic
     /// 原子Boolean 基于CAS+自旋无锁化编程实现，核心Interlocked
     /// 2017/10/18 fhr
     /// </summary>
+    [Serializable]
     public class AtomicBoolean
     {
         private static readonly int TRUE_INT = 1;
