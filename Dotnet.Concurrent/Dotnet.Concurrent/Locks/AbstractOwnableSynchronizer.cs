@@ -19,7 +19,7 @@ namespace Dotnet.Concurrent.Locks
 
         // 当前占有独享资源的线程
         [NonSerialized]
-        internal Thread ExclusiveOwnerThread
+        internal sealed Thread ExclusiveOwnerThread
         {
             get;
             set;
