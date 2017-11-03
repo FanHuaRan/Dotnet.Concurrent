@@ -44,6 +44,8 @@
     <Compile Include="Atomic\AtomicBoolean.cs" />
     <Compile Include="Atomic\AtomicInteger.cs" />
     <Compile Include="Atomic\AtomicLong.cs" />
+    <Compile Include="DotExecutor\Executor.cs" />
+    <Compile Include="DotExecutor\Executors.cs" />
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
     <Compile Include="Program.cs" />
