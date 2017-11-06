@@ -44,8 +44,15 @@
     <Compile Include="Atomic\AtomicBoolean.cs" />
     <Compile Include="Atomic\AtomicInteger.cs" />
     <Compile Include="Atomic\AtomicLong.cs" />
+    <Compile Include="DotExecutor\AbsractExecutorService.cs" />
+    <Compile Include="DotExecutor\Callable.cs" />
     <Compile Include="DotExecutor\Executor.cs" />
     <Compile Include="DotExecutor\Executors.cs" />
+    <Compile Include="DotExecutor\Future.cs" />
+    <Compile Include="DotExecutor\FutureTask.cs" />
+    <Compile Include="DotExecutor\Runnable.cs" />
+    <Compile Include="DotExecutor\RunnableFuture.cs" />
+    <Compile Include="DotExecutor\TimeUnit.cs" />
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
     <Compile Include="Program.cs" />
