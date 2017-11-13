@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dotnet.Concurrent.Common;
 
 namespace Dotnet.Concurrent.DotExecutor
 {
@@ -9,85 +10,56 @@ namespace Dotnet.Concurrent.DotExecutor
     /// 抽象线程池实现
     /// 2017/11/06 fhr
     /// </summary>
-    public class AbsractExecutorService:Executor
+    public abstract class AbsractExecutorService : Executor
     {
-           /**
-     * Returns a {@code RunnableFuture} for the given runnable and default
-     * value.
-     *
-     * @param runnable the runnable task being wrapped
-     * @param value the default value for the returned future
-     * @param <T> the type of the given value
-     * @return a {@code RunnableFuture} which, when run, will run the
-     * underlying runnable and which, as a {@code Future}, will yield
-     * the given value as its result and provide for cancellation of
-     * the underlying task
-     * @since 1.6
-     */
-    protected  RunnableFuture<T> newTaskFor<T>(Runnable runnable, T value) {
-        return new FutureTask<T>(runnable, value);
-    }
-
-    /**
-     * Returns a {@code RunnableFuture} for the given callable task.
-     *
-     * @param callable the callable task being wrapped
-     * @param <T> the type of the callable's result
-     * @return a {@code RunnableFuture} which, when run, will call the
-     * underlying callable and which, as a {@code Future}, will yield
-     * the callable's result as its result and provide for
-     * cancellation of the underlying task
-     * @since 1.6
-     */
-    protected RunnableFuture<T> newTaskFor<T>(Callable<T> callable) {
-        return new FutureTask<T>(callable);
-    }
-
-    /**
-     */
-    public Future<T> submit<T>(Runnable task) {
-        if (task == null) 
+        public RunnableFuture<T> newTaskFor<T>(Runnable runnable, T value) where T:class
         {
-            throw new NullReferenceException();
+            return new FutureTask<T>(runnable, value);
         }
-        RunnableFuture<T> ftask = newTaskFor(task, null);
+
+        public RunnableFuture<T> newTaskFor<T>(Callable<T> callable) where T:class
+        {
+            return new FutureTask<T>(callable);
+        }
+
+        public Future<T> submit<T>(Runnable task) where T:class
+        {
+            if (task == null)
+            {
+                throw new NullReferenceException();
+            }
+            RunnableFuture<T> ftask = newTaskFor<T>(task,null);
+            return ftask;
+        }
+
+    public Future<T> submit<T>(Runnable task, T result) where T:class {
+        if (task == null){ throw new NullReferenceException();
+        }
+        RunnableFuture<T> ftask = newTaskFor(task, result);
         Execute(ftask);
         return ftask;
     }
 
     /**
      * @throws RejectedExecutionException {@inheritDoc}
-     * @throws NullReferenceException       {@inheritDoc}
+     * @throws NullPointerException       {@inheritDoc}
      */
-    public Future<T> submit<T>(Runnable task, T result) {
-        if (task == null) 
-        {
-            throw new NullReferenceException();
+    public Future<T> submit<T>(Callable<T> task) where T:class {
+        if (task == null) { throw new NullReferenceException();
         }
-        RunnableFuture<T> ftask = newTaskFor(task, result);
-        execute(ftask);
-        return ftask;
-    }
-
-    /**
-     * @throws RejectedExecutionException {@inheritDoc}
-     * @throws NullReferenceException       {@inheritDoc}
-     */
-    public <T> Future<T> submit(Callable<T> task) {
-        if (task == null) throw new NullReferenceException();
         RunnableFuture<T> ftask = newTaskFor(task);
-        execute(ftask);
+        Execute(ftask);
         return ftask;
     }
 
     /**
      * the main mechanics of invokeAny.
      */
-    private T doInvokeAny<T>(IEnumerable<Callable<T>> tasks,
-                              bool timed, long nanos)
-    {
-        if (tasks == null)
+    private  T doInvokeAny<T,V>(IEnumerable<V> tasks,
+                              bool timed, long nanos) where V:Callable<T>{
+        if (tasks == null){
             throw new NullReferenceException();
+        }
         int ntasks = tasks.Count();
         if (ntasks == 0){
             throw new ArgumentException();
@@ -174,7 +146,7 @@ namespace Dotnet.Concurrent.DotExecutor
     public <T> List<Future<T>> invokeAll(Collection<? extends Callable<T>> tasks)
         throws InterruptedException {
         if (tasks == null)
-            throw new NullReferenceException();
+            throw new NullPointerException();
         ArrayList<Future<T>> futures = new ArrayList<Future<T>>(tasks.size());
         boolean done = false;
         try {
@@ -206,7 +178,7 @@ namespace Dotnet.Concurrent.DotExecutor
                                          long timeout, TimeUnit unit)
         throws InterruptedException {
         if (tasks == null)
-            throw new NullReferenceException();
+            throw new NullPointerException();
         long nanos = unit.toNanos(timeout);
         ArrayList<Future<T>> futures = new ArrayList<Future<T>>(tasks.size());
         boolean done = false;
@@ -250,5 +222,9 @@ namespace Dotnet.Concurrent.DotExecutor
         }
     }
 
+        public void Execute(Runnable runable)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

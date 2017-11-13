@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Dotnet.Concurrent.DotExecutor
+namespace Dotnet.Concurrent.Common
 {
     /// <summary>
-    /// Callable委托 含有可返回值
+    /// Callable 含有可返回值
     /// 2017/11/06 fhr
     /// </summary>
     /// <typeparam name="T"></typeparam>

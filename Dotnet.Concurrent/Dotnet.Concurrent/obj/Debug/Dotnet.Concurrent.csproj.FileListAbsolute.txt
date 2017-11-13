@@ -1,1 +1,2 @@
 F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\bin\Debug\Dotnet.Concurrent.exe.config
+F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\obj\Debug\Dotnet.Concurrent.csprojResolveAssemblyReference.cache

@@ -44,15 +44,25 @@
     <Compile Include="Atomic\AtomicBoolean.cs" />
     <Compile Include="Atomic\AtomicInteger.cs" />
     <Compile Include="Atomic\AtomicLong.cs" />
+    <Compile Include="BlockingQueue.cs" />
+    <Compile Include="CancellationException.cs" />
+    <Compile Include="Common\RunableAdapters.cs" />
     <Compile Include="DotExecutor\AbsractExecutorService.cs" />
-    <Compile Include="DotExecutor\Callable.cs" />
+    <Compile Include="Common\Callable.cs" />
+    <Compile Include="DotExecutor\CompletionService.cs" />
     <Compile Include="DotExecutor\Executor.cs" />
+    <Compile Include="DotExecutor\ExecutorCompletionService.cs" />
     <Compile Include="DotExecutor\Executors.cs" />
-    <Compile Include="DotExecutor\Future.cs" />
-    <Compile Include="DotExecutor\FutureTask.cs" />
-    <Compile Include="DotExecutor\Runnable.cs" />
-    <Compile Include="DotExecutor\RunnableFuture.cs" />
-    <Compile Include="DotExecutor\TimeUnit.cs" />
+    <Compile Include="Common\Future.cs" />
+    <Compile Include="Common\FutureTask.cs" />
+    <Compile Include="Common\Runnable.cs" />
+    <Compile Include="Common\RunnableAdapter.cs" />
+    <Compile Include="Common\RunnableFuture.cs" />
+    <Compile Include="ExecutionException.cs" />
+    <Compile Include="ForkJoin\ForkJoinPool.cs" />
+    <Compile Include="ForkJoin\ForkJoinTask.cs" />
+    <Compile Include="ForkJoin\RecursiveAction.cs" />
+    <Compile Include="ForkJoin\RecursiveTask.cs" />
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
     <Compile Include="Program.cs" />
@@ -65,10 +75,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Atomic\README.txt" />
+    <Content Include="Common\README.txt" />
     <Content Include="DotExecutor\README.txt" />
     <Content Include="Locks\README.txt" />
     <Content Include="Util\README.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
