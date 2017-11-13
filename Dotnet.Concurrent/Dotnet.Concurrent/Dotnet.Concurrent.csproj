@@ -44,9 +44,10 @@
     <Compile Include="Atomic\AtomicBoolean.cs" />
     <Compile Include="Atomic\AtomicInteger.cs" />
     <Compile Include="Atomic\AtomicLong.cs" />
-    <Compile Include="BlockingQueue.cs" />
+    <Compile Include="Container\BlockingQueue.cs" />
     <Compile Include="CancellationException.cs" />
     <Compile Include="Common\RunableAdapters.cs" />
+    <Compile Include="Container\LinkedBlockingQueue.cs" />
     <Compile Include="DotExecutor\AbsractExecutorService.cs" />
     <Compile Include="Common\Callable.cs" />
     <Compile Include="DotExecutor\CompletionService.cs" />
@@ -65,7 +66,6 @@
     <Compile Include="ForkJoin\RecursiveTask.cs" />
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\LockSupport.cs" />
     <Compile Include="Util\Unsafe.cs" />
@@ -76,6 +76,7 @@
   <ItemGroup>
     <Content Include="Atomic\README.txt" />
     <Content Include="Common\README.txt" />
+    <Content Include="Container\README.txt" />
     <Content Include="DotExecutor\README.txt" />
     <Content Include="Locks\README.txt" />
     <Content Include="Util\README.txt" />
