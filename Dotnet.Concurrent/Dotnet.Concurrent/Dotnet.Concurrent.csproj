@@ -67,6 +67,7 @@
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeUnit.cs" />
     <Compile Include="Util\LockSupport.cs" />
     <Compile Include="Util\Unsafe.cs" />
   </ItemGroup>
