@@ -1,2 +1,5 @@
 F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\bin\Debug\Dotnet.Concurrent.exe.config
 F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\obj\Debug\Dotnet.Concurrent.csprojResolveAssemblyReference.cache
+E:\Programing\c#\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\bin\Debug\Dotnet.Concurrent.exe.config
+E:\Programing\c#\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\obj\Debug\Dotnet.Concurrent.exe
+E:\Programing\c#\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Concurrent\obj\Debug\Dotnet.Concurrent.pdb

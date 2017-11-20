@@ -54,7 +54,7 @@ namespace Dotnet.Concurrent
                 case TimeUnit.SECONDS:
                     return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return SaveMultip(d, C4 / C0, MAX / (C4 / C0));
                 case TimeUnit.HOURS:
                     return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
                 case TimeUnit.DAYS:
@@ -75,19 +75,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d/(C1/C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return d;
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return SaveMultip(d, C2 / C1, MAX / (C2 / C1));
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return SaveMultip(d, C3 / C1, MAX / (C3 / C1));
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return SaveMultip(d, C4 / C1, MAX / (C4 / C1));
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return SaveMultip(d, C5 / C1, MAX / (C5 / C1));
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return SaveMultip(d, C6 / C1, MAX / (C6 / C1));
                 default:
                     return 0L;
             }
@@ -104,19 +104,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d/(C3/C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return  d/(C3/C1);
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return d;
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return SaveMultip(d, C3 / C2, MAX / (C3 / C2));
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return SaveMultip(d, C4 / C2, MAX / (C4 / C2));
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return SaveMultip(d, C5 / C2, MAX / (C5 / C2));
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return SaveMultip(d, C6 / C2, MAX / (C6 / C2));
                 default:
                     return 0L;
             }
@@ -133,19 +133,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d / (C3 / C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return d / (C3 / C1);
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return d / (C3 / C2);
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return d;
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return SaveMultip(d, C4 / C3, MAX / (C4 / C3));
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return SaveMultip(d, C5 / C3, MAX / (C5 / C3));
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return SaveMultip(d, C6 / C3, MAX / (C6 / C3));
                 default:
                     return 0L;
             }
@@ -162,19 +162,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d / (C4 / C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return d / (C4 / C1);
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return d / (C4 / C2);
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return d / (C4 / C3);
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return d;
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return SaveMultip(d, C5 / C4, MAX / (C5 / C4));
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return SaveMultip(d, C6 / C4, MAX / (C6 / C4));
                 default:
                     return 0L;
             }
@@ -191,19 +191,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d / (C5 / C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return d / (C5 / C1);
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return d / (C5 / C2);
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return d / (C5 / C3);
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return d / (C5 / C4);;
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return d;
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return SaveMultip(d, C6 / C5, MAX / (C6 / C5));
                 default:
                     return 0L;
             }
@@ -220,19 +220,19 @@ namespace Dotnet.Concurrent
             switch (unit)
             {
                 case TimeUnit.NANOSECONDS:
-                    return d;
+                    return d / (C6 / C0);
                 case TimeUnit.MICROSECONDS:
-                    return SaveMultip(d, C1 / C0, MAX / (C1 / C0)); ;
+                    return d / (C6 / C1);
                 case TimeUnit.MILLISECONDS:
-                    return SaveMultip(d, C2 / C0, MAX / (C2 / C0));
+                    return d / (C6 / C2);
                 case TimeUnit.SECONDS:
-                    return SaveMultip(d, C3 / C0, MAX / (C3 / C0));
+                    return d / (C6 / C3);
                 case TimeUnit.MINUTES:
-                    return SaveMultip(d, C3 / C0, MAX / (C4 / C0));
+                    return d / (C6 / C4);
                 case TimeUnit.HOURS:
-                    return SaveMultip(d, C5 / C0, MAX / (C5 / C0));
+                    return d / (C6 / C5);
                 case TimeUnit.DAYS:
-                    return SaveMultip(d, C6 / C0, MAX / (C6 / C0));
+                    return d;
                 default:
                     return 0L;
             }
@@ -303,7 +303,7 @@ namespace Dotnet.Concurrent
         /// </summary>
         /// <param name="unit"></param>
         /// <param name="timeout"></param>
-        public static void sleep(this TimeUnit unit, long timeout)
+        public static void sleep(this TimeUnit unit, Int32 timeout)
         {
             if (timeout > 0)
             {
