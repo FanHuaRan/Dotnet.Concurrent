@@ -1,0 +1,1 @@
+﻿ThreadLocal的传统实现
