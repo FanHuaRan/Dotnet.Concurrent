@@ -13,10 +13,27 @@ namespace Dotnet.Concurrent
     /// <typeparam name="T"></typeparam>
     public interface ThreadLocal<T>
     {
+        /// <summary>
+        /// 获取通用初始值
+        /// </summary>
+        /// <returns></returns>
         T InitialValue();
 
+        /// <summary>
+        /// 获取本线程对应的值
+        /// </summary>
+        /// <returns></returns>
         T Get();
 
+        /// <summary>
+        /// 设置本线程对应的值
+        /// </summary>
+        /// <param name="value"></param>
         void Set(T value);
+
+        /// <summary>
+        /// 移除本线程对应的值
+        /// </summary>
+        void Remove();
     }
 }

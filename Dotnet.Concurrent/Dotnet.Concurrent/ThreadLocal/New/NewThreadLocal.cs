@@ -38,13 +38,25 @@ namespace Dotnet.Concurrent
         {
             return nextHashCode.GetAndAdd(HASH_INCREMENT);
         }
-        /// <summary>
-        /// 初始值
-        /// </summary>
-        /// <returns></returns>
-        protected T InitialValue()
+
+        public T InitialValue()
         {
             return default(T);
+        }
+
+        public T Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Set(T value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Remove()
+        {
+            throw new NotImplementedException();
         }
         
         /// <summary>

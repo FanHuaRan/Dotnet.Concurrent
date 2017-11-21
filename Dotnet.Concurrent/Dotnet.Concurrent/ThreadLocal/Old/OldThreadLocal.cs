@@ -41,6 +41,13 @@ namespace Dotnet.Concurrent
            concurrentDictionary.AddOrUpdate(currentThread, value, null);
         }
 
+        public void Remove()
+        {
+            var currentThread = Thread.CurrentThread;
+            T oldValue;
+            concurrentDictionary.TryRemove(currentThread, out oldValue);
+        }
+
         /// <summary>
         /// Creates a thread local variable. The initial value of the variable is
         /// determined by invoking the {@code get} method on the {@code Supplier}.
