@@ -26,26 +26,30 @@ namespace Dotnet.Concurrent
 
         public T Get()
         {
-            var currentThread = Thread.CurrentThread;
             T value;
-            if (concurrentDictionary.TryGetValue(currentThread, out value))
+            if (concurrentDictionary.TryGetValue( Thread.CurrentThread, out value))
             {
                 return value;
             }
-            return default(T);
+            return SetInitial();
         }
 
         public void Set(T value)
         {
-           var currentThread = Thread.CurrentThread;
-           concurrentDictionary.AddOrUpdate(currentThread, value, null);
+           concurrentDictionary.AddOrUpdate(Thread.CurrentThread, value, null);
         }
 
         public void Remove()
         {
-            var currentThread = Thread.CurrentThread;
             T oldValue;
-            concurrentDictionary.TryRemove(currentThread, out oldValue);
+            concurrentDictionary.TryRemove(Thread.CurrentThread, out oldValue);
+        }
+
+        private T SetInitial()
+        {
+            T value = InitialValue();
+            concurrentDictionary.AddOrUpdate(Thread.CurrentThread, value, null);
+            return value;
         }
 
         /// <summary>
