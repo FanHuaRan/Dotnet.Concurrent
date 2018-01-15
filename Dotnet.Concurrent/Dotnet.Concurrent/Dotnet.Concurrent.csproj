@@ -51,6 +51,7 @@
     <Compile Include="DotExecutor\AbsractExecutorService.cs" />
     <Compile Include="Common\Callable.cs" />
     <Compile Include="DotExecutor\CompletionService.cs" />
+    <Compile Include="DotExecutor\ExecutionException.cs" />
     <Compile Include="DotExecutor\Executor.cs" />
     <Compile Include="DotExecutor\ExecutorCompletionService.cs" />
     <Compile Include="DotExecutor\Executors.cs" />
@@ -59,11 +60,8 @@
     <Compile Include="Common\Runnable.cs" />
     <Compile Include="Common\RunnableAdapter.cs" />
     <Compile Include="Common\RunnableFuture.cs" />
+    <Compile Include="DotExecutor\ExecutorService.cs" />
     <Compile Include="ExecutionException.cs" />
-    <Compile Include="ForkJoin\ForkJoinPool.cs" />
-    <Compile Include="ForkJoin\ForkJoinTask.cs" />
-    <Compile Include="ForkJoin\RecursiveAction.cs" />
-    <Compile Include="ForkJoin\RecursiveTask.cs" />
     <Compile Include="Locks\AbstractOwnableSynchronizer.cs" />
     <Compile Include="Locks\AbstractQueuedSynchronizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,7 +71,6 @@
     <Compile Include="ThreadLocal\New\NewSuppliedThreadLocal.cs" />
     <Compile Include="ThreadLocal\New\ThreadLocalMap.cs" />
     <Compile Include="ThreadLocal\ThreadLocal.cs" />
-    <Compile Include="TimeUnit.cs" />
     <Compile Include="Util\LockSupport.cs" />
     <Compile Include="Util\Unsafe.cs" />
   </ItemGroup>

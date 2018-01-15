@@ -6,8 +6,8 @@ using System.Text;
 namespace Dotnet.Concurrent.Common
 {
     /// <summary>
-    /// Callable 含有可返回值
-    /// 2017/11/06 fhr
+    /// 带返回值和可抛出异常的任务执行接口
+    /// 2018/01/15 fhr
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <returns></returns>

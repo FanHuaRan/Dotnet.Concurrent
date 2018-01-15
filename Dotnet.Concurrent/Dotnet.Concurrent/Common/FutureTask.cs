@@ -9,8 +9,8 @@ using Dotnet.Concurrent.Common;
 namespace Dotnet.Concurrent.Common
 {
     /// <summary>
-    /// RunnableFuture的重要实现
-    /// 2017/11/13 fhr
+    /// 务运行的封装实现FutureTask
+    /// 2018/01/15 fhr
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class FutureTask<T> : RunnableFuture<T>
@@ -23,17 +23,23 @@ namespace Dotnet.Concurrent.Common
         private static readonly int CANCELLED = 4;
         private static readonly int INTERRUPTING = 5;
         private static readonly int INTERRUPTED = 6;
+
         //当前状态
         private volatile int state;
-        //被包裹的callable
+
+        //被封装的callable，我们写的逻辑会在这里面
         private Callable<T> callable;
-        //结果值 non-volatile, protected by state reads/writes
+
+        //返回值或者运行异常
         private Object outcome;
-        //运行线程
+
+        //当前任务所运行的线程，通过cas进行保护
         private volatile Thread runner;
-        //下一个等待节点
+
+        //等待当前线程运行结果的节点
         private volatile WaitNode waiters;
 
+        //使用callable的构造方法
         public FutureTask(Callable<T> callable)
         {
             if (callable == null)
@@ -44,7 +50,8 @@ namespace Dotnet.Concurrent.Common
             // ensure visibility of callable
             this.state = NEW;
         }
-        
+
+        //使用Runnable的构造方法
         public FutureTask(Runnable runnable, T result)
         {
             this.callable = RunableAdapters.Callable<T>(runnable, result);
@@ -57,7 +64,6 @@ namespace Dotnet.Concurrent.Common
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-         
         private T report(int s)
         {
             Object x = outcome;
@@ -71,30 +77,33 @@ namespace Dotnet.Concurrent.Common
             }
             throw new ExecutionException((Exception)x);
         }
-       
+
         /// <summary>
-        /// 是否已经取消
+        /// 判断任务是否已经取消 中断中或者已经中断都会认为是已经取消
         /// </summary>
         /// <returns></returns>
         public bool isCancelled()
         {
             return state >= CANCELLED;
         }
+
         /// <summary>
-        /// 是否已经在做，已经做完，异常
+        /// 判断任务是否已经在执行或者执行完成，只要不处于new状态都返回true
         /// </summary>
         /// <returns></returns>
         public bool isDone()
         {
             return state != NEW;
         }
+
         /// <summary>
-        /// 取消当前任务 注意这儿可能取消也可能中断
+        /// 中断任务
         /// </summary>
         /// <param name="mayInterruptIfRunning">是否中断</param>
         /// <returns></returns>
         public bool cancel(bool mayInterruptIfRunning)
         {
+            //如果任务已经尚处于new状态，先尝试使用CAS将任务状态设置为取消或者中断中
             if (!(state == NEW && Interlocked.CompareExchange(ref state, mayInterruptIfRunning ? INTERRUPTING : CANCELLED, NEW) == NEW))
             {
                 return false;
@@ -120,12 +129,14 @@ namespace Dotnet.Concurrent.Common
             }
             finally
             {
+                //进行收尾工作
                 finishCompletion();
             }
             return true;
         }
+
         /// <summary>
-        /// 阻塞获取值 
+        /// //获取运行结果 
         /// </summary>
         /// <returns></returns>
         public T get()
@@ -139,7 +150,7 @@ namespace Dotnet.Concurrent.Common
         }
         
         /// <summary>
-        /// 获取值 带超时机制
+        /// //获取运行结果，带超时
         /// </summary>
         /// <param name="timeout"></param>
         /// <returns></returns>
@@ -152,12 +163,14 @@ namespace Dotnet.Concurrent.Common
             }
             return report(s);
         }
+
         /// <summary>
-        /// 不知道有什么用
+        /// 任务运行完成之后的回调方法
         /// </summary>
         protected void done() { }
+
         /// <summary>
-        /// 设置结果为预期的运行结果
+        /// 设置运行结果和运行状态，这是正确运行的情况
         /// </summary>
         /// <param name="v"></param>
         protected void set(T v)
@@ -171,8 +184,9 @@ namespace Dotnet.Concurrent.Common
                 finishCompletion();
             }
         }
+
         /// <summary>
-        /// 设置结果为异常
+        /// 设置运行结果和运行状态，这是抛出异常的情况
         /// </summary>
         /// <param name="t"></param>
         protected void setException(Exception t)
@@ -186,8 +200,9 @@ namespace Dotnet.Concurrent.Common
                 finishCompletion();
             }
         }
+
         /// <summary>
-        /// 运行任务 核心！！
+        /// 运行任务 核心
         /// </summary>
         public void run()
         {
@@ -233,8 +248,9 @@ namespace Dotnet.Concurrent.Common
                 }
             }
         }
+
         /// <summary>
-        /// 运行然后重置 异常就终止 
+        /// 运行，不设置结果，然后进行状态重置
         /// 是否可重用的区别
         /// </summary>
         /// <returns></returns>
@@ -277,6 +293,7 @@ namespace Dotnet.Concurrent.Common
             }
             return ran && s == NEW;
         }
+
         /// <summary>
         /// 正在中断的处理 实际上就是一直让出cpu
         /// </summary>
@@ -293,9 +310,10 @@ namespace Dotnet.Concurrent.Common
                 }
             }
         }
-        /**
-        * 结束完成的相关善后工作
-        */
+
+        /// <summary>
+        /// 结束运行 依次唤醒等待get结果的节点
+        /// </summary>
         private void finishCompletion()
         {
             // assert state > COMPLETING;
@@ -325,8 +343,9 @@ namespace Dotnet.Concurrent.Common
             done();
             callable = null;        // to reduce footprint
         }
+
         /// <summary>
-        /// 等待任务完成 带超时机制
+        /// 结束运行 依次唤醒等待get结果的节点 带超时机制
         /// </summary>
         /// <param name="timed"></param>
         /// <param name="nanos"></param>
@@ -377,6 +396,7 @@ namespace Dotnet.Concurrent.Common
                     LockSupport.park(this);
             }
         }
+
         /// <summary>
         /// 移除等待节点
         /// </summary>
@@ -409,6 +429,7 @@ namespace Dotnet.Concurrent.Common
                 }
             }
         }
+
         /// <summary>
         /// 等待节点
         /// </summary>

@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Dotnet.Concurrent.Common;
+using Dotnet.Util;
 
 namespace Dotnet.Concurrent.DotExecutor
 {
     /// <summary>
-    ///  Producers submit tasks for execution. 
-    ///  Consumers  take completed tasks and process their results in the order they omplete
-    ///  完成任务的服务 基于生产者-消费者模型
-    ///  2017/11/13 fhr
+    ///  用于批量任务执行管理的服务
+    ///  是用于获取完成任务的服务 基于生产者-消费者模型
+    ///  2018/01/15 fhr
     /// </summary>
-    public class CompletionService<V>
+    public interface CompletionService<V>
     {
         /// <summary>
         /// 提交任务
@@ -42,6 +42,6 @@ namespace Dotnet.Concurrent.DotExecutor
         /// </summary>
         /// <param name="timeout"></param>
         /// <returns></returns>
-        Future<V> Poll(long timeout);
+        Future<V> Poll(long timeout,TimeUnit unit);
     }
 }

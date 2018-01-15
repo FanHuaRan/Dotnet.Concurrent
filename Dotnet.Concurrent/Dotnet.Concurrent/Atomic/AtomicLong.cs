@@ -21,7 +21,7 @@ namespace Dotnet.Concurrent.Atomic
         /// <summary>
         /// 被包装的long值
         /// </summary>
-        private volatile long value;
+        private long value;
         /// <summary>
         /// 比较并设置新值 成功返回true 失败返回false
         /// </summary>
@@ -130,9 +130,9 @@ namespace Dotnet.Concurrent.Atomic
         /// 重写hashcode value相关
         /// </summary>
         /// <returns></returns>
-        public override long GetHashCode()
+        public override int GetHashCode()
         {
-            return value;
+            return (int)value;
         }
         /// <summary>
         /// 重写equals value相关

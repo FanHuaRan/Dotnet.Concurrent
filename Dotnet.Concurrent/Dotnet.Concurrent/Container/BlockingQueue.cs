@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Dotnet.Util;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,7 +69,7 @@ namespace Dotnet.Concurrent
         /// </summary>
         /// <param name="o"></param>
         /// <returns></returns>
-        public bool contains(Object o);
+        bool contains(Object o);
         /// <summary>
         /// 移除所有可用元素到新集合当中 返回移除的元素个数
         /// </summary>
@@ -82,5 +83,7 @@ namespace Dotnet.Concurrent
         /// <param name="c"></param>
         /// <returns></returns>
         int drainTo<V>(IEnumerable<V> c, int maxElements) where V : T;
+
+        T poll<V>(long timeout, TimeUnit unit) where V : T;
     }
 }

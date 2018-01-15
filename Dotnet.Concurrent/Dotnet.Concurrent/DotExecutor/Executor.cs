@@ -7,7 +7,7 @@ using Dotnet.Concurrent.Common;
 namespace Dotnet.Concurrent.DotExecutor
 {
     /// <summary>
-    /// 线程池基本接口
+    /// 任务执行接口
     /// 2017//11/03 fhr
     /// </summary>
     public interface Executor

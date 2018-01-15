@@ -15,6 +15,8 @@ namespace Dotnet.Concurrent.Locks
     [Serializable]
     public abstract class AbstractQueuedSynchronizer : AbstractOwnableSynchronizer
     {
+       static readonly long spinForTimeoutThreshold = 1000L;
+
         /**
          * not instance
          */
@@ -27,9 +29,9 @@ namespace Dotnet.Concurrent.Locks
         /// 队列头部节点 头部节点要么是个空节点  要么就是一个已经得到了资源的节点
         /// </summary>
         [NonSerialized]
-        protected volatile Node head;
+        protected  Node head;
         [NonSerialized]
-        protected volatile Node Head
+        protected  Node Head
         {
             get
             {
@@ -47,7 +49,7 @@ namespace Dotnet.Concurrent.Locks
         /// 队列尾部节点
         /// </summary>
         [NonSerialized]
-        protected volatile Node Tail
+        protected  Node Tail
         {
             get;
             set;
@@ -168,7 +170,7 @@ namespace Dotnet.Concurrent.Locks
                         UnparkSuccessor(h);
                     }
                     //节点如果已经被唤醒且不带传播行为
-                    else if(ws==0&&!CompareAndSetWaitStatus(h,0,Node.PROPAGATE){
+                    else if(ws==0&&!CompareAndSetWaitStatus(h,0,Node.PROPAGATE)){
                         continue;
                     }
                 }
@@ -301,7 +303,7 @@ namespace Dotnet.Concurrent.Locks
         /// 线程休眠且检查是否被中断唤醒 这儿可能有问题！！！！！
         /// </summary>
         /// <returns></returns>
-        private sealed bool parkAndCheckInterrupt()
+        private  bool parkAndCheckInterrupt()
         {
             try
             {
@@ -322,7 +324,7 @@ namespace Dotnet.Concurrent.Locks
         /// <param name="node"></param>
         /// <param name="arg"></param>
         /// <returns></returns>
-        private sealed bool acquireQueued(Node node, int arg)
+        private bool acquireQueued(Node node, int arg)
         {
             bool failed = true;
             try
@@ -420,7 +422,7 @@ namespace Dotnet.Concurrent.Locks
                     {
                         return false;
                     }
-                    if (shouldParkAfterFailedAcquire(p, node) && nanosTimeout > SPING_FOR_TIMEOUT_THRESHOLD)
+                    if (shouldParkAfterFailedAcquire(p, node) && nanosTimeout > spinForTimeoutThreshold)
                     {
                         LockSupport.parkNanos(this, nanosTimeout);
                     }
@@ -430,7 +432,7 @@ namespace Dotnet.Concurrent.Locks
                     //}
                 }
             }
-             ly
+             finally
             {
                 if (failed)
                 {
@@ -557,7 +559,7 @@ namespace Dotnet.Concurrent.Locks
                     {
                         return false;
                     }
-                    if (shouldParkAfterFailedAcquire(p, node) && nanosTimeout > SPING_FOR_TIMEOUT_THRESHOLD)
+                    if (shouldParkAfterFailedAcquire(p, node) && nanosTimeout > spinForTimeoutThreshold)
                     {
                         LockSupport.parkNanos(this, nanosTimeout);
                     }
@@ -689,7 +691,7 @@ namespace Dotnet.Concurrent.Locks
         /// <param name="expect"></param>
         /// <param name="update"></param>
         /// <returns></returns>
-        protected sealed bool CompareAndSetState(int expect, int update)
+        protected bool CompareAndSetState(int expect, int update)
         {
             return Interlocked.CompareExchange(ref state, update, expect) == expect;
         }
@@ -814,7 +816,7 @@ namespace Dotnet.Concurrent.Locks
             /// <summary>
             /// 节点状态
             /// </summary>
-            internal volatile int WaitStatus
+            internal  int WaitStatus
             {
                 get;
                 set;
@@ -822,7 +824,7 @@ namespace Dotnet.Concurrent.Locks
             /// <summary>
             /// 前节点
             /// </summary>
-            internal volatile Node Prev
+            internal  Node Prev
             {
                 get;
                 set;
@@ -830,7 +832,7 @@ namespace Dotnet.Concurrent.Locks
             /// <summary>
             /// 后节点
             /// </summary>
-            internal volatile Node Next
+            internal  Node Next
             {
                 get;
                 set;
@@ -838,7 +840,7 @@ namespace Dotnet.Concurrent.Locks
             /// <summary>
             /// 节点所代表的线程
             /// </summary>
-            internal volatile Thread Thread
+            internal  Thread Thread
             {
                 get;
                 set;
@@ -846,7 +848,7 @@ namespace Dotnet.Concurrent.Locks
             /// <summary>
             /// 下一个等待节点
             /// </summary>
-            internal volatile Node NextWaiter
+            internal  Node NextWaiter
             {
                 get;
                 set;

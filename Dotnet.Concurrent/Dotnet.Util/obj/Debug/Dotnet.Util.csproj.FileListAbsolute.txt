@@ -1,0 +1,4 @@
+F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Util\bin\Debug\Dotnet.Util.dll
+F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Util\bin\Debug\Dotnet.Util.pdb
+F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Util\obj\Debug\Dotnet.Util.dll
+F:\myworkspace\Dotnet.Concurrent\Dotnet.Concurrent\Dotnet.Util\obj\Debug\Dotnet.Util.pdb

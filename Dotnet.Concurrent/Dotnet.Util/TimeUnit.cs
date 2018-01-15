@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Dotnet.Concurrent
+namespace Dotnet.Util
 {
     /// <summary>
     /// 时间类型枚举

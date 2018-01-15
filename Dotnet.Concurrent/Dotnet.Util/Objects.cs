@@ -19,7 +19,7 @@ namespace Dotnet.Util
         /// <param name="obj"></param>
         /// <returns></returns>
         public static T RequireNonNull<T>(T obj)
-        {
+        { 
             if (obj == null)
             {
                 throw new NullReferenceException();

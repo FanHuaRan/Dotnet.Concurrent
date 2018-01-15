@@ -4,18 +4,19 @@ using System.Linq;
 using System.Text;
 using Dotnet.Concurrent.Common;
 using Dotnet.Concurrent.Container;
+using Dotnet.Util;
 
 namespace Dotnet.Concurrent.DotExecutor
 {
     /// <summary>
-    /// 任务队列集合处理实现 
-    /// 2017/11/13 fhr
+    /// ExecutorCompletionService是对CompletionService的实现
+    /// 2018/01/15 fhr
     /// </summary>
     /// <typeparam name="V"></typeparam>
-    public class ExecutorCompletionService<V> : CompletionService<V> where V : class
+    public class ExecutorCompletionService<V> : CompletionService<V>
     {
         /// <summary>
-        /// 包装的线程池服务
+        /// 被包装Executor
         /// </summary>
         private readonly Executor executor;
         /// <summary>
@@ -27,10 +28,10 @@ namespace Dotnet.Concurrent.DotExecutor
         /// </summary>
         private readonly BlockingQueue<Future<V>> completionQueue;
 
-        /**
-         * Creates an ExecutorCompletionService using the supplied executor for base task execution 
-         * 
-         */
+        /// <summary>
+        /// Creates an ExecutorCompletionService using the supplied executor for base task execution 
+        /// </summary>
+        /// <param name="executor"></param>
         public ExecutorCompletionService(Executor executor)
         {
             if (executor == null)
@@ -42,10 +43,12 @@ namespace Dotnet.Concurrent.DotExecutor
             this.completionQueue = new LinkedBlockingQueue<Future<V>>();
         }
 
-        /**
-         * Creates an ExecutorCompletionService using the supplied
-         * executor for base task execution and the supplied queue as its completion queue.
-         */
+        /// <summary>
+        /// Creates an ExecutorCompletionService using the supplied
+        /// executor for base task execution and the supplied queue as its completion queue.
+        /// </summary>
+        /// <param name="executor"></param>
+        /// <param name="completionQueue"></param>
         public ExecutorCompletionService(Executor executor,
                                          BlockingQueue<Future<V>> completionQueue)
         {
@@ -58,7 +61,12 @@ namespace Dotnet.Concurrent.DotExecutor
             this.completionQueue = completionQueue;
         }
 
-        private RunnableFuture<V> newTaskFor(Callable<V> task)
+        /// <summary>
+        /// 包装callable
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        private  RunnableFuture<V> newTaskFor(Callable<V> task)
         {
             if (aes == null)
             {
@@ -70,7 +78,13 @@ namespace Dotnet.Concurrent.DotExecutor
             }
         }
 
-        private RunnableFuture<V> newTaskFor(Runnable task, V result)
+        /// <summary>
+        /// 包装runnable
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private  RunnableFuture<V> newTaskFor(Runnable task, V result)
         {
             if (aes == null)
             {
@@ -82,7 +96,12 @@ namespace Dotnet.Concurrent.DotExecutor
             }
         }
 
-        public Future<V> submit(Callable<V> task)
+        /// <summary>
+        /// 提交任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <returns></returns>
+        public  Future<V> Submit(Callable<V> task)
         {
             if (task == null)
             {
@@ -93,7 +112,13 @@ namespace Dotnet.Concurrent.DotExecutor
             return f;
         }
 
-        public Future<V> submit(Runnable task, V result)
+        /// <summary>
+        /// 提交任务
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public Future<V> Submit(Runnable task, V result)
         {
             if (task == null)
             {
@@ -104,24 +129,37 @@ namespace Dotnet.Concurrent.DotExecutor
             return f;
         }
 
-        public Future<V> take()
+        /// <summary>
+        /// 获取一个执行结果（并移除） 阻塞
+        /// </summary>
+        /// <returns></returns>
+        public Future<V> Take()
         {
             return completionQueue.take();
         }
 
-        public Future<V> poll()
+        /// <summary>
+        /// 获取一个执行结果（并移除） 不阻塞
+        /// </summary>
+        /// <returns></returns>
+        public Future<V> Poll()
         {
             return completionQueue.poll();
         }
-        
-        public Future<V> poll(long timeout)
+
+        /// <summary>
+        /// 获取一个执行结果（并移除） 带超时
+        /// </summary>
+        /// <param name="timeout"></param>
+        /// <param name="unit"></param>
+        /// <returns></returns>
+        public Future<V> Poll(long timeout,TimeUnit unit)
         {
-            return completionQueue.poll(timeout);
+            return completionQueue.poll(timeout,unit);
         }
 
         /// <summary>
-        /// FutureTask extension to enqueue upon completion
-        /// 包含完成任务队列记录的Future task
+        /// 扩展FutureTask，重写了其done方法用于将完成任务放置在阻塞队列！！！
         /// </summary>
         private class QueueingFuture : FutureTask<V>
         {
@@ -137,6 +175,5 @@ namespace Dotnet.Concurrent.DotExecutor
             private readonly Future<V> task;
             private readonly BlockingQueue<Future<V>> completionQueue;
         }
-
     }
 }
